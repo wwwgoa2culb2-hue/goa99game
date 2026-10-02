@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,13 +14,13 @@
         body {
             background-color: #121212;
             color: #ffffff;
-            padding-bottom: 60px;
+            padding-bottom: 70px;
         }
         .container {
             max-width: 400px;
             margin: 0 auto;
             min-height: 100vh;
-            background: #181818;
+            background: #181812;
             position: relative;
         }
         header {
@@ -30,103 +30,31 @@
             font-size: 20px;
             font-weight: bold;
         }
-        .form-box {
-            padding: 30px 20px;
-        }
-        .form-box h2 {
-            margin-bottom: 20px;
-            text-align: center;
-            color: #ff416c;
-        }
-        .input-group {
-            margin-bottom: 15px;
-        }
-        .input-group label {
-            display: block;
-            font-size: 14px;
-            margin-bottom: 5px;
-            color: #ccc;
-        }
-        .input-group input {
-            width: 100%;
-            padding: 12px;
-            background: #222;
-            border: 1px solid #444;
-            color: #fff;
-            border-radius: 8px;
-            font-size: 16px;
-        }
-        .btn {
-            width: 100%;
-            padding: 12px;
-            background: linear-gradient(135deg, #ff416c, #ff4b2b);
-            border: none;
-            color: white;
-            font-size: 16px;
-            font-weight: bold;
-            border-radius: 8px;
-            cursor: pointer;
-            margin-top: 10px;
-        }
-        .switch-text {
-            text-align: center;
-            margin-top: 15px;
-            font-size: 14px;
-            color: #aaa;
-        }
-        .switch-text span {
-            color: #ff416c;
-            cursor: pointer;
-            font-weight: bold;
-        }
-        /* डैशबोर्ड स्टाइल */
-        .wallet-card {
-            background: #222;
-            margin: 15px;
-            padding: 20px;
-            border-radius: 10px;
-            text-align: center;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-        }
-        .wallet-card h2 {
-            font-size: 26px;
-            color: #00ffcc;
-            margin-top: 5px;
-        }
         .section-title {
-            margin: 20px 15px 10px 15px;
-            font-size: 18px;
-            border-left: 4px solid #ff416c;
-            padding-left: 8px;
+            padding: 15px 15px 5px 15px;
+            font-size: 16px;
+            font-weight: bold;
+            color: #ff416c;
         }
-        .grid-container {
+        .game-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            padding: 0 15px;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            padding: 10px 15px;
         }
         .game-card {
             background: #222;
-            padding: 20px;
-            border-radius: 10px;
+            border-radius: 8px;
             text-align: center;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            padding: 15px 10px;
+            border: 1px solid #333;
         }
-        .game-card h3 {
-            font-size: 16px;
-            margin-bottom: 5px;
+        .game-card h4 {
+            font-size: 13px;
+            color: #fff;
+            margin-top: 5px;
         }
-        .game-card p {
-            font-size: 12px;
-            color: #888;
-        }
-        .logout-btn {
-            margin: 20px 15px;
-            background: #333;
-            color: #ff416c;
-            border: 1px solid #ff416c;
-        }
-        nav {
+        .nav-bar {
             position: fixed;
             bottom: 0;
             left: 50%;
@@ -139,174 +67,92 @@
             padding: 10px 0;
             border-top: 1px solid #333;
         }
-        nav a {
-            color: #fff;
-            text-decoration: none;
-            font-size: 12px;
+        .nav-item {
             text-align: center;
+            color: #aaa;
+            font-size: 12px;
+            text-decoration: none;
         }
-        .hidden {
-            display: none !important;
+        .nav-item.active {
+            color: #ff416c;
         }
     </style>
 </head>
 <body>
+    <div class="container">
+        <header>Goa 99 Club</header>
 
-<div class="container">
-    <header>Goa 99 Club</header>
+        <div class="section-title">Popular Games</div>
+        <div class="game-grid">
+            <div class="game-card">
+                <h4>Aviator</h4>
+            </div>
+            <div class="game-card">
+                <h4>Vortex</h4>
+            </div>
+            <div class="game-card">
+                <h4>PUBG</h4>
+            </div>
+        </div>
 
-    <!-- रजिस्ट्रेशन फॉर्म -->
-    <div id="register-section" class="form-box">
-        <h2>नया खाता बनाएँ (Register)</h2>
-        <div class="input-group">
-            <label>मोबाइल नंबर</label>
-            <input type="text" id="reg-phone" placeholder="अपना नंबर दर्ज करें">
+        <div class="section-title">Lottery</div>
+        <div class="game-grid">
+            <div class="game-card">
+                <h4>Win Go</h4>
+            </div>
+            <div class="game-card">
+                <h4>K3</h4>
+            </div>
+            <div class="game-card">
+                <h4>5D</h4>
+            </div>
         </div>
-        <div class="input-group">
-            <label>पासवर्ड</label>
-            <input type="password" id="reg-password" placeholder="पासवर्ड बनाएं">
+
+        <div class="section-title">Rummy</div>
+        <div class="game-grid">
+            <div class="game-card">
+                <h4>365 Rummy</h4>
+            </div>
+            <div class="game-card">
+                <h4>V8 Poker</h4>
+            </div>
+            <div class="game-card">
+                <h4>Koolbet</h4>
+            </div>
         </div>
-        <button class="btn" onclick="registerUser()">रजिस्टर करें</button>
-        <div class="switch-text">पहिले से खाता है? <span onclick="showLogin()">लॉगिन करें</span></div>
+
+        <div class="section-title">Casino & Slots</div>
+        <div class="game-grid">
+            <div class="game-card">
+                <h4>Crazy Time</h4>
+            </div>
+            <div class="game-card">
+                <h4>Roulette</h4>
+            </div>
+            <div class="game-card">
+                <h4>Jili Game</h4>
+            </div>
+        </div>
+
+        <div class="section-title">Fishing</div>
+        <div class="game-grid">
+            <div class="game-card">
+                <h4>Jackpot Fishing</h4>
+            </div>
+            <div class="game-card">
+                <h4>Happy Fishing</h4>
+            </div>
+            <div class="game-card">
+                <h4>Royal Fishing</h4>
+            </div>
+        </div>
+
+        <div class="nav-bar">
+            <a href="#" class="nav-item active">Home</a>
+            <a href="#" class="nav-item">Activity</a>
+            <a href="#" class="nav-item">Promotion</a>
+            <a href="#" class="nav-item">Account</a>
+        </div>
     </div>
-
-    <!-- लॉगिन फॉर्म -->
-    <div id="login-section" class="form-box hidden">
-        <h2>लॉगिन करें (Login)</h2>
-        <div class="input-group">
-            <label>मोबाइल नंबर</label>
-            <input type="text" id="login-phone" placeholder="अपना नंबर दर्ज करें">
-        </div>
-        <div class="input-group">
-            <label>पासवर्ड</label>
-            <input type="password" id="login-password" placeholder="पासवर्ड दर्ज करें">
-        </div>
-        <button class="btn" onclick="loginUser()">लॉगिन</button>
-        <div class="switch-text">खाता नहीं है? <span onclick="showRegister()">रजिस्टर करें</span></div>
-    </div>
-
-    <!-- मुख्य डैशबोर्ड (लॉगिन के बाद दिखेगा) -->
-    <div id="dashboard-section" class="hidden">
-        <div class="wallet-card">
-            <p>उपलब्ध बैलेंस (Balance)</p>
-            <h2 id="user-balance">₹500.00</h2>
-        </div>
-
-        <div class="section-title">लोकप्रिय गेम (Popular Games)</div>
-        <div class="grid-container">
-            <div class="game-card">
-                <h3>Win Go</h3>
-                <p>लॉटरी गेम</p>
-            </div>
-            <div class="game-card">
-                <h3>Aviator</h3>
-                <p>क्रैश गेम</p>
-            </div>
-            <div class="game-card">
-                <h3>Rummy</h3>
-                <p>कार्ड गेम</p>
-            </div>
-            <div class="game-card">
-                <h3>Casino</h3>
-                <p>लाइव कैसीनो</p>
-            </div>
-        </div>
-
-        <button class="btn logout-btn" onclick="logoutUser()">लॉग आउट (Logout)</button>
-
-        <nav>
-            <a href="#">🏠 होम</a>
-            <a href="#">🎁 गतिविधि</a>
-            <a href="#">📢 प्रमोशन</a>
-            <a href="#">👤 अकाउंट</a>
-        </nav>
-    </div>
-</div>
-
-<script>
-    // चेक करें कि क्या यूजर पहले से लॉगिन है
-    window.onload = function() {
-        const loggedUser = localStorage.getItem('goa_logged_user');
-        if (loggedUser) {
-            showDashboard();
-        }
-    }
-
-    function showLogin() {
-        document.getElementById('register-section').classList.add('hidden');
-        document.getElementById('login-section').classList.remove('hidden');
-    }
-
-    function showRegister() {
-        document.getElementById('login-section').classList.add('hidden');
-        document.getElementById('register-section').classList.remove('hidden');
-    }
-
-    function registerUser() {
-        const phone = document.getElementById('reg-phone').value.trim();
-        const password = document.getElementById('reg-password').value.trim();
-
-        if(!phone || !password) {
-            alert('कृपया सभी जानकारी भरें!');
-            return;
-        }
-
-        // चेक करें कि नंबर पहले से रजिस्टर तो नहीं
-        if(localStorage.getItem('user_' + phone)) {
-            alert('यह नंबर पहले से रजिस्टर है! कृपया लॉगिन करें।');
-            showLogin();
-            return;
-        }
-
-        // यूजर डेटा सेव करें (शुरुआती बैलेंस ₹1000 मिलेगा)
-        const userData = { password: password, balance: 1000.00 };
-        localStorage.setItem('user_' + phone, JSON.stringify(userData));
-        
-        alert('रजिस्ट्रेशन सफल हुआ! अब लॉगिन करें।');
-        showLogin();
-    }
-
-    function loginUser() {
-        const phone = document.getElementById('login-phone').value.trim();
-        const password = document.getElementById('login-password').value.trim();
-
-        const storedData = localStorage.getItem('user_' + phone);
-
-        if(!storedData) {
-            alert('यह यूजर रजिस्टर्ड नहीं है! पहले रजिस्टर करें।');
-            return;
-        }
-
-        const userObj = JSON.parse(storedData);
-
-        if(userObj.password === password) {
-            localStorage.setItem('goa_logged_user', phone);
-            showDashboard();
-        } else {
-            alert('गलत पासवर्ड!');
-        }
-    }
-
-    function showDashboard() {
-        document.getElementById('register-section').classList.add('hidden');
-        document.getElementById('login-section').classList.add('hidden');
-        document.getElementById('dashboard-section').classList.remove('hidden');
-
-        // वॉलेट बैलेंस लोड करें
-        const phone = localStorage.getItem('goa_logged_user');
-        const userObj = JSON.parse(localStorage.getItem('user_' + phone));
-        if(userObj) {
-            document.getElementById('user-balance').innerText = '₹' + userObj.balance.toFixed(2);
-        }
-    }
-
-    function logoutUser() {
-        localStorage.removeItem('goa_logged_user');
-        document.getElementById('dashboard-section').classList.add('hidden');
-        showLogin();
-    }
-</script>
-
 </body>
 </html>
-
