@@ -1,1 +1,100 @@
-goa99game
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Goa 99 Club - Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: #ffffff;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 400px;
+            margin: auto;
+            background: #1e1e1e;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+        }
+        h1 {
+            color: #ffcc00;
+        }
+        .wallet {
+            font-size: 18px;
+            margin-bottom: 20px;
+            background: #2c2c2c;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .btn-group {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .btn-green { background-color: #28a745; color: white; }
+        .btn-red { background-color: #dc3545; color: white; }
+        .btn-violet { background-color: #6f42c1; color: white; }
+        
+        #result {
+            font-size: 20px;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Goa 99 Club</h1>
+        <div class="wallet">बैलेंस: ₹<span id="balance">1000</span></div>
+        
+        <p>रंग चुनें और अपनी किस्मत आजमाएं!</p>
+        
+        <div class="btn-group">
+            <button class="btn-green" onclick="playGame('हरा')">हरा (Green)</button>
+            <button class="btn-violet" onclick="playGame('बैंगनी')">बैंगनी (Violet)</button>
+            <button class="btn-red" onclick="playGame('लाल')">लाल (Red)</button>
+        </div>
+
+        <div id="result"></div>
+    </div>
+
+    <script>
+        let balance = 1000;
+
+        function playGame(selectedColor) {
+            const colors = ['हरा', 'लाल', 'बैंगनी', 'हरा', 'लाल'];
+            const randomColor = colors[Math.floor(Math.random() * colors.length)];
+            
+            const resultDiv = document.getElementById('result');
+            const balanceSpan = document.getElementById('balance');
+
+            if (selectedColor === randomColor) {
+                balance += 100;
+                resultDiv.style.color = '#28a745';
+                resultDiv.innerHTML = `बधाई हो! निकला: ${randomColor}. आप जीत गए! 🎉`;
+            } else {
+                balance -= 100;
+                resultDiv.style.color = '#dc3545';
+                resultDiv.innerHTML = `अरे नहीं! निकला: ${randomColor}. आप हार गए। 😢`;
+            }
+
+            balanceSpan.innerText = balance;
+        }
+    </script>
+
+</body>
+</html>
