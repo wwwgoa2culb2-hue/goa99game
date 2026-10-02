@@ -3,98 +3,310 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Goa 99 Club - Game</title>
+    <title>Goa 99 Club</title>
     <style>
-        body {
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
             font-family: Arial, sans-serif;
+        }
+        body {
             background-color: #121212;
             color: #ffffff;
-            text-align: center;
-            margin: 0;
-            padding: 20px;
+            padding-bottom: 60px;
         }
         .container {
             max-width: 400px;
-            margin: auto;
-            background: #1e1e1e;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+            margin: 0 auto;
+            min-height: 100vh;
+            background: #181818;
+            position: relative;
         }
-        h1 {
-            color: #ffcc00;
+        header {
+            background: linear-gradient(135deg, #ff416c, #ff4b2b);
+            padding: 15px;
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
         }
-        .wallet {
-            font-size: 18px;
+        .form-box {
+            padding: 30px 20px;
+        }
+        .form-box h2 {
             margin-bottom: 20px;
-            background: #2c2c2c;
-            padding: 10px;
-            border-radius: 5px;
+            text-align: center;
+            color: #ff416c;
         }
-        .btn-group {
-            display: flex;
-            justify-content: space-around;
-            margin: 20px 0;
+        .input-group {
+            margin-bottom: 15px;
         }
-        button {
-            padding: 10px 20px;
+        .input-group label {
+            display: block;
+            font-size: 14px;
+            margin-bottom: 5px;
+            color: #ccc;
+        }
+        .input-group input {
+            width: 100%;
+            padding: 12px;
+            background: #222;
+            border: 1px solid #444;
+            color: #fff;
+            border-radius: 8px;
             font-size: 16px;
+        }
+        .btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #ff416c, #ff4b2b);
             border: none;
-            border-radius: 5px;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .switch-text {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 14px;
+            color: #aaa;
+        }
+        .switch-text span {
+            color: #ff416c;
             cursor: pointer;
             font-weight: bold;
         }
-        .btn-green { background-color: #28a745; color: white; }
-        .btn-red { background-color: #dc3545; color: white; }
-        .btn-violet { background-color: #6f42c1; color: white; }
-        
-        #result {
-            font-size: 20px;
-            margin-top: 20px;
-            font-weight: bold;
+        /* डैशबोर्ड स्टाइल */
+        .wallet-card {
+            background: #222;
+            margin: 15px;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+        }
+        .wallet-card h2 {
+            font-size: 26px;
+            color: #00ffcc;
+            margin-top: 5px;
+        }
+        .section-title {
+            margin: 20px 15px 10px 15px;
+            font-size: 18px;
+            border-left: 4px solid #ff416c;
+            padding-left: 8px;
+        }
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            padding: 0 15px;
+        }
+        .game-card {
+            background: #222;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+        .game-card h3 {
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+        .game-card p {
+            font-size: 12px;
+            color: #888;
+        }
+        .logout-btn {
+            margin: 20px 15px;
+            background: #333;
+            color: #ff416c;
+            border: 1px solid #ff416c;
+        }
+        nav {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 400px;
+            background: #1a1a1a;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            border-top: 1px solid #333;
+        }
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 12px;
+            text-align: center;
+        }
+        .hidden {
+            display: none !important;
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <h1>Goa 99 Club</h1>
-        <div class="wallet">बैलेंस: ₹<span id="balance">1000</span></div>
-        
-        <p>रंग चुनें और अपनी किस्मत आजमाएं!</p>
-        
-        <div class="btn-group">
-            <button class="btn-green" onclick="playGame('हरा')">हरा (Green)</button>
-            <button class="btn-violet" onclick="playGame('बैंगनी')">बैंगनी (Violet)</button>
-            <button class="btn-red" onclick="playGame('लाल')">लाल (Red)</button>
-        </div>
+<div class="container">
+    <header>Goa 99 Club</header>
 
-        <div id="result"></div>
+    <!-- रजिस्ट्रेशन फॉर्म -->
+    <div id="register-section" class="form-box">
+        <h2>नया खाता बनाएँ (Register)</h2>
+        <div class="input-group">
+            <label>मोबाइल नंबर</label>
+            <input type="text" id="reg-phone" placeholder="अपना नंबर दर्ज करें">
+        </div>
+        <div class="input-group">
+            <label>पासवर्ड</label>
+            <input type="password" id="reg-password" placeholder="पासवर्ड बनाएं">
+        </div>
+        <button class="btn" onclick="registerUser()">रजिस्टर करें</button>
+        <div class="switch-text">पहिले से खाता है? <span onclick="showLogin()">लॉगिन करें</span></div>
     </div>
 
-    <script>
-        let balance = 1000;
+    <!-- लॉगिन फॉर्म -->
+    <div id="login-section" class="form-box hidden">
+        <h2>लॉगिन करें (Login)</h2>
+        <div class="input-group">
+            <label>मोबाइल नंबर</label>
+            <input type="text" id="login-phone" placeholder="अपना नंबर दर्ज करें">
+        </div>
+        <div class="input-group">
+            <label>पासवर्ड</label>
+            <input type="password" id="login-password" placeholder="पासवर्ड दर्ज करें">
+        </div>
+        <button class="btn" onclick="loginUser()">लॉगिन</button>
+        <div class="switch-text">खाता नहीं है? <span onclick="showRegister()">रजिस्टर करें</span></div>
+    </div>
 
-        function playGame(selectedColor) {
-            const colors = ['हरा', 'लाल', 'बैंगनी', 'हरा', 'लाल'];
-            const randomColor = colors[Math.floor(Math.random() * colors.length)];
-            
-            const resultDiv = document.getElementById('result');
-            const balanceSpan = document.getElementById('balance');
+    <!-- मुख्य डैशबोर्ड (लॉगिन के बाद दिखेगा) -->
+    <div id="dashboard-section" class="hidden">
+        <div class="wallet-card">
+            <p>उपलब्ध बैलेंस (Balance)</p>
+            <h2 id="user-balance">₹500.00</h2>
+        </div>
 
-            if (selectedColor === randomColor) {
-                balance += 100;
-                resultDiv.style.color = '#28a745';
-                resultDiv.innerHTML = `बधाई हो! निकला: ${randomColor}. आप जीत गए! 🎉`;
-            } else {
-                balance -= 100;
-                resultDiv.style.color = '#dc3545';
-                resultDiv.innerHTML = `अरे नहीं! निकला: ${randomColor}. आप हार गए। 😢`;
-            }
+        <div class="section-title">लोकप्रिय गेम (Popular Games)</div>
+        <div class="grid-container">
+            <div class="game-card">
+                <h3>Win Go</h3>
+                <p>लॉटरी गेम</p>
+            </div>
+            <div class="game-card">
+                <h3>Aviator</h3>
+                <p>क्रैश गेम</p>
+            </div>
+            <div class="game-card">
+                <h3>Rummy</h3>
+                <p>कार्ड गेम</p>
+            </div>
+            <div class="game-card">
+                <h3>Casino</h3>
+                <p>लाइव कैसीनो</p>
+            </div>
+        </div>
 
-            balanceSpan.innerText = balance;
+        <button class="btn logout-btn" onclick="logoutUser()">लॉग आउट (Logout)</button>
+
+        <nav>
+            <a href="#">🏠 होम</a>
+            <a href="#">🎁 गतिविधि</a>
+            <a href="#">📢 प्रमोशन</a>
+            <a href="#">👤 अकाउंट</a>
+        </nav>
+    </div>
+</div>
+
+<script>
+    // चेक करें कि क्या यूजर पहले से लॉगिन है
+    window.onload = function() {
+        const loggedUser = localStorage.getItem('goa_logged_user');
+        if (loggedUser) {
+            showDashboard();
         }
-    </script>
+    }
+
+    function showLogin() {
+        document.getElementById('register-section').classList.add('hidden');
+        document.getElementById('login-section').classList.remove('hidden');
+    }
+
+    function showRegister() {
+        document.getElementById('login-section').classList.add('hidden');
+        document.getElementById('register-section').classList.remove('hidden');
+    }
+
+    function registerUser() {
+        const phone = document.getElementById('reg-phone').value.trim();
+        const password = document.getElementById('reg-password').value.trim();
+
+        if(!phone || !password) {
+            alert('कृपया सभी जानकारी भरें!');
+            return;
+        }
+
+        // चेक करें कि नंबर पहले से रजिस्टर तो नहीं
+        if(localStorage.getItem('user_' + phone)) {
+            alert('यह नंबर पहले से रजिस्टर है! कृपया लॉगिन करें।');
+            showLogin();
+            return;
+        }
+
+        // यूजर डेटा सेव करें (शुरुआती बैलेंस ₹1000 मिलेगा)
+        const userData = { password: password, balance: 1000.00 };
+        localStorage.setItem('user_' + phone, JSON.stringify(userData));
+        
+        alert('रजिस्ट्रेशन सफल हुआ! अब लॉगिन करें।');
+        showLogin();
+    }
+
+    function loginUser() {
+        const phone = document.getElementById('login-phone').value.trim();
+        const password = document.getElementById('login-password').value.trim();
+
+        const storedData = localStorage.getItem('user_' + phone);
+
+        if(!storedData) {
+            alert('यह यूजर रजिस्टर्ड नहीं है! पहले रजिस्टर करें।');
+            return;
+        }
+
+        const userObj = JSON.parse(storedData);
+
+        if(userObj.password === password) {
+            localStorage.setItem('goa_logged_user', phone);
+            showDashboard();
+        } else {
+            alert('गलत पासवर्ड!');
+        }
+    }
+
+    function showDashboard() {
+        document.getElementById('register-section').classList.add('hidden');
+        document.getElementById('login-section').classList.add('hidden');
+        document.getElementById('dashboard-section').classList.remove('hidden');
+
+        // वॉलेट बैलेंस लोड करें
+        const phone = localStorage.getItem('goa_logged_user');
+        const userObj = JSON.parse(localStorage.getItem('user_' + phone));
+        if(userObj) {
+            document.getElementById('user-balance').innerText = '₹' + userObj.balance.toFixed(2);
+        }
+    }
+
+    function logoutUser() {
+        localStorage.removeItem('goa_logged_user');
+        document.getElementById('dashboard-section').classList.add('hidden');
+        showLogin();
+    }
+</script>
 
 </body>
 </html>
+
