@@ -3,156 +3,141 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Goa 99 Club</title>
+    <title>Daman Gaming - Deposit & Play</title>
+    <!-- qrcode.js CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, sans-serif;
-        }
-        body {
-            background-color: #121212;
-            color: #ffffff;
-            padding-bottom: 70px;
-        }
-        .container {
-            max-width: 400px;
-            margin: 0 auto;
-            min-height: 100vh;
-            background: #181812;
-            position: relative;
-        }
-        header {
-            background: linear-gradient(135deg, #ff416c, #ff4b2b);
-            padding: 15px;
-            text-align: center;
-            font-size: 20px;
-            font-weight: bold;
-        }
-        .section-title {
-            padding: 15px 15px 5px 15px;
-            font-size: 16px;
-            font-weight: bold;
-            color: #ff416c;
-        }
-        .game-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            padding: 10px 15px;
-        }
-        .game-card {
-            background: #222;
-            border-radius: 8px;
-            text-align: center;
-            padding: 15px 10px;
-            border: 1px solid #333;
-        }
-        .game-card h4 {
-            font-size: 13px;
-            color: #fff;
-            margin-top: 5px;
-        }
-        .nav-bar {
-            position: fixed;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100%;
-            max-width: 400px;
-            background: #1a1a1a;
-            display: flex;
-            justify-content: space-around;
-            padding: 10px 0;
-            border-top: 1px solid #333;
-        }
-        .nav-item {
-            text-align: center;
-            color: #aaa;
-            font-size: 12px;
-            text-decoration: none;
-        }
-        .nav-item.active {
-            color: #ff416c;
-        }
+        body { font-family: Arial, sans-serif; background: #f4f6f9; margin: 0; padding: 20px; color: #333; }
+        .container { max-width: 450px; margin: auto; background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        h2, h3 { text-align: center; color: #e74c3c; }
+        .box { background: #fafafa; padding: 15px; border-radius: 8px; margin-bottom: 15px; border: 1px solid #ddd; }
+        .btn { width: 100%; background: #e74c3c; color: white; border: none; padding: 12px; font-size: 16px; border-radius: 6px; cursor: pointer; font-weight: bold; margin-top: 10px; }
+        .btn:hover { background: #c0392b; }
+        input, select { width: 100%; padding: 10px; margin-top: 5px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+        #qrcode { display: flex; justify-content: center; margin: 15px 0; }
+        .wallet-bal { font-size: 18px; font-weight: bold; color: #27ae60; text-align: center; margin-bottom: 15px; }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>Goa 99 Club</header>
 
-        <div class="section-title">Popular Games</div>
-        <div class="game-grid">
-            <div class="game-card">
-                <h4>Aviator</h4>
-            </div>
-            <div class="game-card">
-                <h4>Vortex</h4>
-            </div>
-            <div class="game-card">
-                <h4>PUBG</h4>
-            </div>
-        </div>
+<div class="container">
+    <h2>Daman Game Portal</h2>
+    <div class="wallet-bal">Available Balance: ₹<span id="userBalance">100.00</span></div>
 
-        <div class="section-title">Lottery</div>
-        <div class="game-grid">
-            <div class="game-card">
-                <h4>Win Go</h4>
-            </div>
-            <div class="game-card">
-                <h4>K3</h4>
-            </div>
-            <div class="game-card">
-                <h4>5D</h4>
-            </div>
-        </div>
-
-        <div class="section-title">Rummy</div>
-        <div class="game-grid">
-            <div class="game-card">
-                <h4>365 Rummy</h4>
-            </div>
-            <div class="game-card">
-                <h4>V8 Poker</h4>
-            </div>
-            <div class="game-card">
-                <h4>Koolbet</h4>
-            </div>
-        </div>
-
-        <div class="section-title">Casino & Slots</div>
-        <div class="game-grid">
-            <div class="game-card">
-                <h4>Crazy Time</h4>
-            </div>
-            <div class="game-card">
-                <h4>Roulette</h4>
-            </div>
-            <div class="game-card">
-                <h4>Jili Game</h4>
-            </div>
-        </div>
-
-        <div class="section-title">Fishing</div>
-        <div class="game-grid">
-            <div class="game-card">
-                <h4>Jackpot Fishing</h4>
-            </div>
-            <div class="game-card">
-                <h4>Happy Fishing</h4>
-            </div>
-            <div class="game-card">
-                <h4>Royal Fishing</h4>
-            </div>
-        </div>
-
-        <div class="nav-bar">
-            <a href="#" class="nav-item active">Home</a>
-            <a href="#" class="nav-item">Activity</a>
-            <a href="#" class="nav-item">Promotion</a>
-            <a href="#" class="nav-item">Account</a>
-        </div>
+    <!-- 1. Deposit Section (UPI: 9078928619@ptyes) -->
+    <div class="box">
+        <h3>Deposit Funds</h3>
+        <label>Enter Amount (₹):</label>
+        <input type="number" id="depositAmount" value="500" min="100">
+        
+        <div style="text-align: center; font-weight: bold; color: #555;">UPI ID: 9078928619@ptyes</div>
+        
+        <!-- Clean QR Code with no brand logos in between -->
+        <div id="qrcode"></div>
+        
+        <label>Enter UTR / Transaction ID:</label>
+        <input type="text" id="utrNumber" placeholder="12-digit UTR number">
+        <button class="btn" onclick="submitDeposit()">Confirm Deposit</button>
     </div>
+
+    <!-- 2. Gaming Section (WinGo / Color Trading Real Logic) -->
+    <div class="box">
+        <h3>WinGo / Color Trading Game</h3>
+        <p>Select Color & Win:</p>
+        <select id="selectedColor">
+            <option value="green">Green (2x)</option>
+            <option value="red">Red (2x)</option>
+            <option value="violet">Violet (4x)</option>
+        </select>
+        
+        <label>Bet Amount (₹):</label>
+        <input type="number" id="betAmount" value="50" min="10">
+        
+        <button class="btn" style="background: #27ae60;" onclick="playGame()">Play Game</button>
+        <p id="gameResult" style="text-align: center; font-weight: bold; margin-top: 10px;"></p>
+    </div>
+</div>
+
+<script>
+    // Manage user balance using Local Storage
+    let balance = parseFloat(localStorage.getItem('user_balance')) || 100.00;
+    document.getElementById('userBalance').innerText = balance.toFixed(2);
+
+    const upiID = "9078928619@ptyes";
+    const payeeName = "Lokanath Jena";
+
+    // Generate dynamic clean QR code
+    function generateQR(amount) {
+        document.getElementById("qrcode").innerHTML = "";
+        const upiUrl = `upi://pay?pa=${upiID}&pn=${encodeURIComponent(payeeName)}&am=${amount}&cu=INR`;
+        
+        new QRCode(document.getElementById("qrcode"), {
+            text: upiUrl,
+            width: 180,
+            height: 180,
+            colorDark: "#000000",
+            colorLight: "#ffffff",
+            correctLevel: QRCode.CorrectLevel.H
+        });
+    }
+
+    // Update QR code when deposit amount changes
+    document.getElementById('depositAmount').addEventListener('input', function() {
+        let amt = this.value || 100;
+        generateQR(amt);
+    });
+
+    // Load default QR for 500
+    generateQR(500);
+
+    // Deposit submission logic
+    function submitDeposit() {
+        let utr = document.getElementById('utrNumber').value;
+        let amt = parseFloat(document.getElementById('depositAmount').value);
+        
+        if(!utr || utr.length < 8) {
+            alert("Please enter a valid UTR / Transaction ID!");
+            return;
+        }
+
+        balance += amt;
+        localStorage.setItem('user_balance', balance);
+        document.getElementById('userBalance').innerText = balance.toFixed(2);
+        
+        alert(`Deposit successful! ₹${amt} added to your wallet.`);
+        document.getElementById('utrNumber').value = '';
+    }
+
+    // Real gaming logic (WinGo Color Trading)
+    function playGame() {
+        let betAmt = parseFloat(document.getElementById('betAmount').value);
+        let chosenColor = document.getElementById('selectedColor').value;
+
+        if(betAmt > balance) {
+            alert("Insufficient balance! Please deposit funds first.");
+            return;
+        }
+
+        balance -= betAmt;
+
+        const colors = ['red', 'green', 'red', 'green', 'violet', 'red', 'green'];
+        let winningColor = colors[Math.floor(Math.random() * colors.length)];
+        
+        let resultText = "";
+        if(chosenColor === winningColor) {
+            let winMultiplier = (winningColor === 'violet') ? 4 : 2;
+            let winAmount = betAmt * winMultiplier;
+            balance += winAmount;
+            resultText = `Congratulations! 🎉 Result: ${winningColor.toUpperCase()}. You won ₹${winAmount}!`;
+        } else {
+            resultText = `Oops! ❌ Result: ${winningColor.toUpperCase()}. You lost the bet.`;
+        }
+
+        localStorage.setItem('user_balance', balance);
+        document.getElementById('userBalance').innerText = balance.toFixed(2);
+        document.getElementById('gameResult').innerText = resultText;
+    }
+</script>
+
 </body>
 </html>
