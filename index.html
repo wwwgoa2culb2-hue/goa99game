@@ -3,141 +3,371 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daman Gaming - Deposit & Play</title>
-    <!-- qrcode.js CDN -->
+    <title>Goa 99 Club - Daman Style</title>
+    <!-- qrcode.js CDN for clean UPI QR Code -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <style>
-        body { font-family: Arial, sans-serif; background: #f4f6f9; margin: 0; padding: 20px; color: #333; }
-        .container { max-width: 450px; margin: auto; background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
-        h2, h3 { text-align: center; color: #e74c3c; }
-        .box { background: #fafafa; padding: 15px; border-radius: 8px; margin-bottom: 15px; border: 1px solid #ddd; }
-        .btn { width: 100%; background: #e74c3c; color: white; border: none; padding: 12px; font-size: 16px; border-radius: 6px; cursor: pointer; font-weight: bold; margin-top: 10px; }
-        .btn:hover { background: #c0392b; }
-        input, select { width: 100%; padding: 10px; margin-top: 5px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
-        #qrcode { display: flex; justify-content: center; margin: 15px 0; }
-        .wallet-bal { font-size: 18px; font-weight: bold; color: #27ae60; text-align: center; margin-bottom: 15px; }
+        body { font-family: Arial, sans-serif; background: #121212; color: #fff; margin: 0; padding-bottom: 70px; }
+        .header { background: linear-gradient(135deg, #ff416c, #ff4b2b); padding: 15px; text-align: center; font-size: 20px; font-weight: bold; }
+        .container { padding: 15px; max-width: 480px; margin: auto; }
+        .page { display: none; }
+        .page.active { display: block; }
+        
+        /* Auth Styles */
+        .auth-box { background: #1e1e1e; padding: 20px; border-radius: 10px; margin-top: 50px; }
+        input, select { width: 100%; padding: 12px; margin: 10px 0; background: #2c2c2c; border: 1px solid #444; color: #fff; border-radius: 5px; box-sizing: border-box; }
+        .btn { width: 100%; background: linear-gradient(135deg, #ff416c, #ff4b2b); color: white; border: none; padding: 12px; font-size: 16px; border-radius: 5px; cursor: pointer; font-weight: bold; margin-top: 10px; }
+        
+        /* Categories & Game Cards */
+        .section-title { color: #ff416c; font-size: 16px; margin: 15px 0 8px 0; font-weight: bold; }
+        .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+        .card { background: #1e1e1e; border: 1px solid #333; padding: 15px 10px; text-align: center; border-radius: 8px; cursor: pointer; font-size: 14px; font-weight: bold; color: #ddd; }
+        .card:hover { border-color: #ff416c; color: #fff; }
+
+        /* Bottom Nav Bar */
+        .navbar { position: fixed; bottom: 0; left: 0; right: 0; background: #181818; display: flex; justify-content: space-around; padding: 10px 0; border-top: 1px solid #333; max-width: 480px; margin: auto; }
+        .nav-item { text-align: center; color: #888; font-size: 12px; cursor: pointer; }
+        .nav-item.active { color: #ff416c; font-weight: bold; }
+        
+        /* Account & Wallet */
+        .wallet-card { background: #1e1e1e; padding: 15px; border-radius: 10px; margin-bottom: 15px; border: 1px solid #333; }
+        #qrcode { display: flex; justify-content: center; margin: 15px 0; background: #fff; padding: 10px; border-radius: 8px; }
+        
+        /* Specific Game UI */
+        .game-screen { background: #1a1a1a; padding: 15px; border-radius: 8px; text-align: center; border: 1px solid #333; }
+        .multiplier { font-size: 32px; color: #27ae60; font-weight: bold; margin: 20px 0; }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <h2>Daman Game Portal</h2>
-    <div class="wallet-bal">Available Balance: ₹<span id="userBalance">100.00</span></div>
+    <div class="header" id="headerTitle">Goa 99 Club</div>
 
-    <!-- 1. Deposit Section (UPI: 9078928619@ptyes) -->
-    <div class="box">
-        <h3>Deposit Funds</h3>
-        <label>Enter Amount (₹):</label>
-        <input type="number" id="depositAmount" value="500" min="100">
-        
-        <div style="text-align: center; font-weight: bold; color: #555;">UPI ID: 9078928619@ptyes</div>
-        
-        <!-- Clean QR Code with no brand logos in between -->
-        <div id="qrcode"></div>
-        
-        <label>Enter UTR / Transaction ID:</label>
-        <input type="text" id="utrNumber" placeholder="12-digit UTR number">
-        <button class="btn" onclick="submitDeposit()">Confirm Deposit</button>
+    <div class="container">
+
+        <!-- 1. REGISTER PAGE -->
+        <div id="registerPage" class="page active">
+            <div class="auth-box">
+                <h2>Register</h2>
+                <input type="text" id="regPhone" placeholder="Phone Number">
+                <input type="password" id="regPass" placeholder="Set Password">
+                <button class="btn" onclick="registerUser()">Register</button>
+                <p style="text-align:center; margin-top:15px; cursor:pointer; color:#ff416c;" onclick="showPage('loginPage')">Already have an account? Login</p>
+            </div>
+        </div>
+
+        <!-- 2. LOGIN PAGE -->
+        <div id="loginPage" class="page">
+            <div class="auth-box">
+                <h2>Login</h2>
+                <input type="text" id="logPhone" placeholder="Phone Number">
+                <input type="password" id="logPass" placeholder="Password">
+                <button class="btn" onclick="loginUser()">Login</button>
+                <p style="text-align:center; margin-top:15px; cursor:pointer; color:#ff416c;" onclick="showPage('registerPage')">Don't have an account? Register</p>
+            </div>
+        </div>
+
+        <!-- 3. HOME PAGE (Daman Style Dashboard) -->
+        <div id="homePage" class="page">
+            <div class="section-title">Popular Games</div>
+            <div class="grid">
+                <div class="card" onclick="openGame('Aviator')">Aviator</div>
+                <div class="card" onclick="openGame('Vortex')">Vortex</div>
+                <div class="card" onclick="openGame('PUBG')">PUBG</div>
+            </div>
+
+            <div class="section-title">Lottery</div>
+            <div class="grid">
+                <div class="card" onclick="openGame('Win Go')">Win Go</div>
+                <div class="card" onclick="openGame('K3')">K3</div>
+                <div class="card" onclick="openGame('5D')">5D</div>
+            </div>
+
+            <div class="section-title">Rummy</div>
+            <div class="grid">
+                <div class="card" onclick="openGame('365 Rummy')">365 Rummy</div>
+                <div class="card" onclick="openGame('V8 Poker')">V8 Poker</div>
+                <div class="card" onclick="openGame('Koolbet')">Koolbet</div>
+            </div>
+
+            <div class="section-title">Casino & Slots</div>
+            <div class="grid">
+                <div class="card" onclick="openGame('Crazy Time')">Crazy Time</div>
+                <div class="card" onclick="openGame('Roulette')">Roulette</div>
+                <div class="card" onclick="openGame('Jili Game')">Jili Game</div>
+            </div>
+
+            <div class="section-title">Fishing</div>
+            <div class="grid">
+                <div class="card" onclick="openGame('Jackpot Fishing')">Jackpot Fishing</div>
+                <div class="card" onclick="openGame('Happy Fishing')">Happy Fishing</div>
+                <div class="card" onclick="openGame('Royal Fishing')">Royal Fishing</div>
+            </div>
+        </div>
+
+        <!-- 4. ACTIVITY PAGE -->
+        <div id="activityPage" class="page">
+            <h2>Activity & Rewards</h2>
+            <div class="wallet-card">
+                <p>🎁 Daily Login Bonus: <b>Claim ₹10</b></p>
+                <button class="btn" onclick="claimBonus()">Claim</button>
+            </div>
+        </div>
+
+        <!-- 5. PROMOTION PAGE -->
+        <div id="promotionPage" class="page">
+            <h2>Promotion & Invite</h2>
+            <div class="wallet-card">
+                <p>Invite your friends and earn commission!</p>
+                <p><b>Referral Link:</b> <span style="color:#ff416c;">https://goa99.club/ref/10268143</span></p>
+                <button class="btn" onclick="alert('Referral link copied!')">Copy Link</button>
+            </div>
+        </div>
+
+        <!-- 6. ACCOUNT PAGE (Wallet, Deposit, Withdraw, VIP) -->
+        <div id="accountPage" class="page">
+            <div class="wallet-card">
+                <h3>UID: 10268143 | <span style="color:gold;">VIP2</span></h3>
+                <p>Available Balance: ₹<span id="userBalance">100.00</span></p>
+                <button class="btn" style="background:#27ae60;" onclick="showDepositBox()">Deposit</button>
+                <button class="btn" style="background:#e67e22;" onclick="showWithdrawBox()">Withdraw</button>
+            </div>
+
+            <!-- Deposit Box (UPI: 9078928619@ptyes) -->
+            <div id="depositSection" class="wallet-card" style="display:none;">
+                <h3>Deposit Funds</h3>
+                <label>Amount (₹):</label>
+                <input type="number" id="depAmount" value="500">
+                <p style="text-align:center; font-weight:bold;">UPI ID: 9078928619@ptyes</p>
+                <div id="qrcode"></div>
+                <label>Enter UTR / Transaction ID:</label>
+                <input type="text" id="utrNo" placeholder="12-digit UTR">
+                <button class="btn" onclick="confirmDeposit()">Submit Deposit</button>
+            </div>
+
+            <!-- Withdraw Box -->
+            <div id="withdrawSection" class="wallet-card" style="display:none;">
+                <h3>Withdraw to Bank</h3>
+                <label>Withdraw Amount (₹):</label>
+                <input type="number" id="wthAmount" placeholder="Enter amount">
+                <label>Bank Account / UPI:</label>
+                <input type="text" id="wthBank" placeholder="Account No / IFSC / UPI">
+                <button class="btn" onclick="confirmWithdraw()">Apply Withdrawal</button>
+            </div>
+        </div>
+
+        <!-- REAL GAME PLAY SCREENS -->
+        <div id="gamePlayPage" class="page">
+            <h2 id="gameTitle">Game</h2>
+            <div class="game-screen">
+                <div id="gameDynamicContent">
+                    <!-- Dynamic content loads here -->
+                </div>
+                <button class="btn" style="background:#444; margin-top:20px;" onclick="showPage('homePage')">Back to Home</button>
+            </div>
+        </div>
+
     </div>
 
-    <!-- 2. Gaming Section (WinGo / Color Trading Real Logic) -->
-    <div class="box">
-        <h3>WinGo / Color Trading Game</h3>
-        <p>Select Color & Win:</p>
-        <select id="selectedColor">
-            <option value="green">Green (2x)</option>
-            <option value="red">Red (2x)</option>
-            <option value="violet">Violet (4x)</option>
-        </select>
-        
-        <label>Bet Amount (₹):</label>
-        <input type="number" id="betAmount" value="50" min="10">
-        
-        <button class="btn" style="background: #27ae60;" onclick="playGame()">Play Game</button>
-        <p id="gameResult" style="text-align: center; font-weight: bold; margin-top: 10px;"></p>
+    <!-- BOTTOM NAVIGATION BAR -->
+    <div class="navbar" id="bottomNav" style="display:none;">
+        <div class="nav-item active" onclick="switchTab('homePage', this)">Home</div>
+        <div class="nav-item" onclick="switchTab('activityPage', this)">Activity</div>
+        <div class="nav-item" onclick="switchTab('promotionPage', this)">Promotion</div>
+        <div class="nav-item" onclick="switchTab('accountPage', this)">Account</div>
     </div>
-</div>
 
-<script>
-    // Manage user balance using Local Storage
-    let balance = parseFloat(localStorage.getItem('user_balance')) || 100.00;
-    document.getElementById('userBalance').innerText = balance.toFixed(2);
-
-    const upiID = "9078928619@ptyes";
-    const payeeName = "Lokanath Jena";
-
-    // Generate dynamic clean QR code
-    function generateQR(amount) {
-        document.getElementById("qrcode").innerHTML = "";
-        const upiUrl = `upi://pay?pa=${upiID}&pn=${encodeURIComponent(payeeName)}&am=${amount}&cu=INR`;
-        
-        new QRCode(document.getElementById("qrcode"), {
-            text: upiUrl,
-            width: 180,
-            height: 180,
-            colorDark: "#000000",
-            colorLight: "#ffffff",
-            correctLevel: QRCode.CorrectLevel.H
-        });
-    }
-
-    // Update QR code when deposit amount changes
-    document.getElementById('depositAmount').addEventListener('input', function() {
-        let amt = this.value || 100;
-        generateQR(amt);
-    });
-
-    // Load default QR for 500
-    generateQR(500);
-
-    // Deposit submission logic
-    function submitDeposit() {
-        let utr = document.getElementById('utrNumber').value;
-        let amt = parseFloat(document.getElementById('depositAmount').value);
-        
-        if(!utr || utr.length < 8) {
-            alert("Please enter a valid UTR / Transaction ID!");
-            return;
-        }
-
-        balance += amt;
-        localStorage.setItem('user_balance', balance);
+    <script>
+        let balance = parseFloat(localStorage.getItem('user_balance')) || 100.00;
         document.getElementById('userBalance').innerText = balance.toFixed(2);
-        
-        alert(`Deposit successful! ₹${amt} added to your wallet.`);
-        document.getElementById('utrNumber').value = '';
-    }
 
-    // Real gaming logic (WinGo Color Trading)
-    function playGame() {
-        let betAmt = parseFloat(document.getElementById('betAmount').value);
-        let chosenColor = document.getElementById('selectedColor').value;
-
-        if(betAmt > balance) {
-            alert("Insufficient balance! Please deposit funds first.");
-            return;
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
         }
 
-        balance -= betAmt;
-
-        const colors = ['red', 'green', 'red', 'green', 'violet', 'red', 'green'];
-        let winningColor = colors[Math.floor(Math.random() * colors.length)];
-        
-        let resultText = "";
-        if(chosenColor === winningColor) {
-            let winMultiplier = (winningColor === 'violet') ? 4 : 2;
-            let winAmount = betAmt * winMultiplier;
-            balance += winAmount;
-            resultText = `Congratulations! 🎉 Result: ${winningColor.toUpperCase()}. You won ₹${winAmount}!`;
-        } else {
-            resultText = `Oops! ❌ Result: ${winningColor.toUpperCase()}. You lost the bet.`;
+        function registerUser() {
+            let p = document.getElementById('regPhone').value;
+            if(!p) { alert('Please enter phone number'); return; }
+            alert('Registration Successful! Please login.');
+            showPage('loginPage');
         }
 
-        localStorage.setItem('user_balance', balance);
-        document.getElementById('userBalance').innerText = balance.toFixed(2);
-        document.getElementById('gameResult').innerText = resultText;
-    }
-</script>
+        function loginUser() {
+            let p = document.getElementById('logPhone').value;
+            if(!p) { alert('Please enter phone number'); return; }
+            alert('Login Successful!');
+            document.getElementById('bottomNav').style.display = 'flex';
+            showPage('homePage');
+        }
 
+        function switchTab(pageId, element) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+            element.classList.add('active');
+        }
+
+        // Real Logic for Individual Games
+        function openGame(gameName) {
+            document.getElementById('gameTitle').innerText = gameName;
+            showPage('gamePlayPage');
+            let contentBox = document.getElementById('gameDynamicContent');
+
+            if(gameName === 'Aviator') {
+                contentBox.innerHTML = `
+                    <p>Plane is ready to fly!</p>
+                    <div class="multiplier" id="aviatorMultiplier">1.00x</div>
+                    <label>Bet Amount (₹):</label>
+                    <input type="number" id="aviatorBet" value="50">
+                    <button class="btn" onclick="startAviator()">Start Flight / Cashout</button>
+                    <p id="aviatorResult" style="margin-top:10px; font-weight:bold;"></p>
+                `;
+            } else if(gameName === 'Win Go' || gameName === 'K3' || gameName === '5D') {
+                contentBox.innerHTML = `
+                    <p>Select Color / Outcome:</p>
+                    <select id="lotteryChoice">
+                        <option value="green">Green (2x)</option>
+                        <option value="red">Red (2x)</option>
+                        <option value="violet">Violet (4x)</option>
+                    </select>
+                    <label>Bet Amount (₹):</label>
+                    <input type="number" id="lotteryBet" value="50">
+                    <button class="btn" style="background:#27ae60;" onclick="playLotteryGame()">Place Bet</button>
+                    <p id="lotteryResult" style="margin-top:10px; font-weight:bold;"></p>
+                `;
+            } else {
+                // General Slot / Casino / Rummy / Fishing Logic
+                contentBox.innerHTML = `
+                    <p>Spin & Win!</p>
+                    <div class="multiplier">🎰 777 🎰</div>
+                    <label>Bet Amount (₹):</label>
+                    <input type="number" id="generalBet" value="50">
+                    <button class="btn" style="background:#e74c3c;" onclick="playGeneralGame('${gameName}')">Spin / Play</button>
+                    <p id="generalResult" style="margin-top:10px; font-weight:bold;"></p>
+                `;
+            }
+        }
+
+        // Aviator Specific Logic
+        let flightInterval;
+        function startAviator() {
+            let bet = parseFloat(document.getElementById('aviatorBet').value);
+            if(bet > balance) { alert('Insufficient balance!'); return; }
+            balance -= bet;
+            updateBal();
+
+            let mult = 1.00;
+            let crashAt = (Math.random() * 3 + 1.1).toFixed(2); // Random crash between 1.10x and 4.10x
+            let mElem = document.getElementById('aviatorMultiplier');
+            let rElem = document.getElementById('aviatorResult');
+            rElem.innerText = "Plane flying...";
+
+            clearInterval(flightInterval);
+            flightInterval = setInterval(() => {
+                mult += 0.05;
+                mElem.innerText = mult.toFixed(2) + 'x';
+                if(mult >= crashAt) {
+                    clearInterval(flightInterval);
+                    rElem.innerHTML = `<span style="color:red;">Plane Crashed at ${crashAt}x! You lost ₹${bet}</span>`;
+                }
+            }, 200);
+        }
+
+        // WinGo / Lottery Logic
+        function playLotteryGame() {
+            let bet = parseFloat(document.getElementById('lotteryBet').value);
+            let choice = document.getElementById('lotteryChoice').value;
+            if(bet > balance) { alert('Insufficient balance!'); return; }
+            balance -= bet;
+
+            const outcomes = ['red', 'green', 'red', 'green', 'violet'];
+            let winningColor = outcomes[Math.floor(Math.random() * outcomes.length)];
+            let rElem = document.getElementById('lotteryResult');
+
+            if(choice === winningColor) {
+                let winAmt = choice === 'violet' ? bet * 4 : bet * 2;
+                balance += winAmt;
+                rElem.innerHTML = `<span style="color:green;">Result: ${winningColor.toUpperCase()}! You won ₹${winAmt} 🎉</span>`;
+            } else {
+                rElem.innerHTML = `<span style="color:red;">Result: ${winningColor.toUpperCase()}. You lost ₹${bet} ❌</span>`;
+            }
+            updateBal();
+        }
+
+        // General Casino/Slot Logic
+        function playGeneralGame(name) {
+            let bet = parseFloat(document.getElementById('generalBet').value);
+            if(bet > balance) { alert('Insufficient balance!'); return; }
+            balance -= bet;
+
+            let win = Math.random() > 0.4;
+            let rElem = document.getElementById('generalResult');
+
+            if(win) {
+                let winAmt = bet * 2;
+                balance += winAmt;
+                rElem.innerHTML = `<span style="color:green;">${name}: You Won ₹${winAmt}! 🎉</span>`;
+            } else {
+                rElem.innerHTML = `<span style="color:red;">${name}: You Lost ₹${bet} ❌</span>`;
+            }
+            updateBal();
+        }
+
+        function updateBal() {
+            localStorage.setItem('user_balance', balance);
+            document.getElementById('userBalance').innerText = balance.toFixed(2);
+        }
+
+        function showDepositBox() {
+            document.getElementById('depositSection').style.display = 'block';
+            document.getElementById('withdrawSection').style.display = 'none';
+            generateQR(500);
+        }
+
+        function showWithdrawBox() {
+            document.getElementById('withdrawSection').style.display = 'block';
+            document.getElementById('depositSection').style.display = 'none';
+        }
+
+        function generateQR(amount) {
+            document.getElementById("qrcode").innerHTML = "";
+            const upiUrl = `upi://pay?pa=9078928619@ptyes&pn=Lokanath Jena&am=${amount}&cu=INR`;
+            new QRCode(document.getElementById("qrcode"), {
+                text: upiUrl,
+                width: 160,
+                height: 160,
+                colorDark: "#000000",
+                colorLight: "#ffffff",
+                correctLevel: QRCode.CorrectLevel.H
+            });
+        }
+
+        function confirmDeposit() {
+            let utr = document.getElementById('utrNo').value;
+            let amt = parseFloat(document.getElementById('depAmount').value);
+            if(!utr || utr.length < 8) { alert('Enter valid UTR number'); return; }
+            balance += amt;
+            updateBal();
+            alert(`Deposit of ₹${amt} successful!`);
+            document.getElementById('depositSection').style.display = 'none';
+        }
+
+        function confirmWithdraw() {
+            let amt = parseFloat(document.getElementById('wthAmount').value);
+            let bank = document.getElementById('wthBank').value;
+            if(!amt || !bank) { alert('Fill all details'); return; }
+            if(amt > balance) { alert('Insufficient balance'); return; }
+            balance -= amt;
+            updateBal();
+            alert(`Withdrawal request of ₹${amt} submitted successfully! Status: Processing.`);
+            document.getElementById('withdrawSection').style.display = 'none';
+        }
+
+        function claimBonus() {
+            balance += 10;
+            updateBal();
+            alert('Claimed ₹10 successfully!');
+        }
+    </script>
 </body>
 </html>
